@@ -1,0 +1,77 @@
+name: JS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  contents: write
+  packages: read
+  actions: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build Angular Project and Run PSE
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup PSE
+      - name: Setup PSE
+        uses: invisirisk/pse-action@dev-test
+        with:
+          api_url: "https://app.stage.invisirisk.com"
+          app_token: ${{ secrets.IR_API_KEY_L_STAGE }}
+
+      # Setup Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.11.0"
+
+      # Install global tools
+      - name: Install global tools
+        run: |
+          npm install -g @angular/cli
+          npm install -g yarn
+          npm install -g gulp-cli
+
+      # Install project dependencies
+      - name: Install dependencies
+        # working-directory: angular
+        run: yarn install
+
+      # Run gulp build
+      - name: Run gulp build
+       # working-directory: angular
+        run: npx gulp build
+
+      # Angular build
+      - name: Angular build
+      #  working-directory: angular
+        run: ng build
+
+      # Copy web.config to dist
+      - name: Copy web.config
+       # working-directory: angular
+        run: cp ./web.config ./dist/web.config
+
+      # Cleanup PSE
+      - name: Cleanup PSE
+        if: always()
+        uses: invisirisk/pse-action@dev-test
+        with:
+          cleanup: "true"
+
+      # Gather Analytics
+      - name: Gather Analytics
+        if: always()
+        uses: invisirisk/pse-action@dev-test
+        with:
+          api_url: "https://app.stage.invisirisk.com"
+          app_token: ${{ secrets.IR_API_KEY_L_STAGE }}
+          send_job_status: "true"
+          debug: "true"
