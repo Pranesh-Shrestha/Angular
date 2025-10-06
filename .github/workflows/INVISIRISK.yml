@@ -51,7 +51,7 @@ jobs:
 
       - name: Angular build first
       #  working-directory: angular
-        run: NODE_OPTIONS=--openssl-legacy-provider ng build --configuration=production --output-path=dist
+        run: NODE_OPTIONS=--openssl-legacy-provider ng build --output-path=dist
         
       # Angular build
       - name: Angular build
