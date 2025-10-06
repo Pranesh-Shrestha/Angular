@@ -1,12 +1,8 @@
 import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+console.log('✅ Placeholder Angular main.ts');
 
-if (environment.production) {
-  enableProdMode();
-}
+// Optional: use JwtModule just to make the import work
+import { JwtModule } from '@auth0/angular-jwt';
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+console.log(JwtModule);
