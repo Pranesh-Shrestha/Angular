@@ -19,7 +19,8 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "@auth0/angular-jwt": "^5.1.0"
+    "@auth0/angular-jwt": "^5.1.0",
+    "zone.js": "^0.13.2"
   },
   "devDependencies": {
     "@angular/cli": "^16.2.0",
