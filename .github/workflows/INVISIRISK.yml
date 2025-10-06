@@ -30,7 +30,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "22"
 
       # Install global tools
       - name: Install global tools
@@ -49,6 +49,10 @@ jobs:
        # working-directory: angular
         run: npx gulp build
 
+      - name: Angular build first
+      #  working-directory: angular
+        run: NODE_OPTIONS=--openssl-legacy-provider ng build --configuration=production --output-path=dist
+        
       # Angular build
       - name: Angular build
       #  working-directory: angular
