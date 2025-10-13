@@ -71,6 +71,6 @@ jobs:
       #   uses: invisirisk/pse-action@latest
       #   with:
       #     api_url: "https://app.invisirisk.com"
-          app_token: ${{ secrets.IR_API_KEY_ANGULAR_PROD }}
-          send_job_status: "true"
-          debug: "true"
+          # app_token: ${{ secrets.IR_API_KEY_ANGULAR_PROD }}
+          # send_job_status: "true"
+          # debug: "true"
